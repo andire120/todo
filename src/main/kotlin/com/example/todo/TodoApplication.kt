@@ -9,4 +9,3 @@ class TodoApplication
 fun main(args: Array<String>) {
 	runApplication<TodoApplication>(*args)
 }
-//실행

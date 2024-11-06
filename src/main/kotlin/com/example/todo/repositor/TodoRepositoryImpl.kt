@@ -1,21 +1,20 @@
-package com.example.todo.repositor
+package com.example.todo.repository
 
 import com.example.todo.database.Todo
 import com.example.todo.database.TodoDataBase
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.lang.Exception
 import java.time.LocalDateTime
 
 @Service
 class TodoRepositoryImpl(
     val todoDataBase: TodoDataBase
-): TodoRepository{
+) : TodoRepository {
 
     override fun save(todo: Todo): Todo? {
-        // 1. index?
 
-        return todo.index?.let { index ->
-            //update
+        return todo.index?.let {  index ->
+            // update
 
             findOne(index)?.apply {
                 this.title = todo.title
@@ -23,7 +22,7 @@ class TodoRepositoryImpl(
                 this.schedule = todo.schedule
                 this.updatedAt = LocalDateTime.now()
             }
-        } ?: kotlin.run {
+        }?: kotlin.run {
             // insert
 
             todo.apply {
@@ -35,25 +34,25 @@ class TodoRepositoryImpl(
                 this
             }
         }
-
     }
 
     override fun saveAll(todoList: MutableList<Todo>): Boolean {
-        return try {
+        return try{
             todoList.forEach {
                 save(it)
             }
             true
-        }catch (e: Exception) {
+        }catch (e: Exception){
             false
         }
     }
 
     override fun delete(index: Int): Boolean {
+
         return findOne(index)?.let {
             todoDataBase.todoList.remove(it)
             true
-        }?: kotlin.run {
+        } ?: kotlin.run {
             false
         }
     }

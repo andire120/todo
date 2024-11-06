@@ -1,4 +1,4 @@
-package com.example.todo.repositor
+package com.example.todo.repository
 
 import com.example.todo.database.Todo
 
@@ -9,6 +9,7 @@ interface TodoRepository {
 
     fun delete(index: Int): Boolean
 
-    fun findOne(index: Int): Todo?
+    fun findOne(index:Int): Todo?
     fun findAll(): MutableList<Todo>
+
 }
