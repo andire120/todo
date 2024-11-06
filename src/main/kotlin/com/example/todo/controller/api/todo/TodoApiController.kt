@@ -18,9 +18,10 @@ class TodoApiController(
     val todoService: TodoService
 ) {
     // R
+    @ApiOperation(value = "일정확인")
     @GetMapping(path = [""])
     fun read(
-        @ApiParam(value = "index")
+        @ApiParam(name = "index")
         @RequestParam(required = false) index:Int?): ResponseEntity<Any?> {
 
         return index?.let {
